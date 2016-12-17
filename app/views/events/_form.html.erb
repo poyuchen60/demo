@@ -5,9 +5,12 @@
   <% end %>
   </ul>
 <% end %>
+<div class="form-group">
+  <%= f.label :name, "Name" %>
+  <%= f.text_field :name, class: "form-control" %>
+</div>
 
-<%= f.label :name, "Name" %>
-<%= f.text_field :name %>
-
-<%= f.label :description, "Description" %>
-<%= f.text_area :description %>
+<div class="form-group">
+  <%= f.label :description, "Description" %>
+  <%= f.text_area :description, class: "form-control" %>
+</div>
