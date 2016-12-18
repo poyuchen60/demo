@@ -1,5 +1,7 @@
 <h2><%= @event.name %>: Attendees List</h2>
-
+<p>
+  <%= link_to "Back to events", events_path %>
+</p>
 <ul>
   <% @attendees.each do |a| %>
     <li>

@@ -2,6 +2,14 @@
   <%= @event.name %>
 </h2>
 <p>
+  <%= @event.category.try(:name) %>
+</p>
+<ul>
+  <% @event.groups.each do |g| %>
+    <li><%= g.name %></li>
+  <% end %>
+</ul>
+<p>
   <%= simple_format @event.description %>
 </p>
 

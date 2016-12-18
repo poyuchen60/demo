@@ -8,7 +8,6 @@
   <tr>
     <td><%= e.name %></td>
     <td>
-      <button class="btn btn-primary" type="button">Hello</button>
       <%= link_to "Show", event_path(e), class: "btn btn-primary" %>
       <%= link_to "Attendees List", event_attendees_path(e), class: "btn btn-primary" %>
       <%= link_to "(JSON)", event_path(e, format: :json), class: "btn btn-default" %>
