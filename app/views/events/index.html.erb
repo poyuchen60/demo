@@ -2,23 +2,41 @@
   Events List
 </h1>
 
+<p><%= link_to "Latest", latest_events_path %></p>
 
-<table class="table">
-  <% @events.each do |e| %>
-  <tr>
-    <td><%= e.name %></td>
-    <td>
-      <%= link_to "Show", event_path(e), class: "btn btn-primary" %>
-      <%= link_to "Attendees List", event_attendees_path(e), class: "btn btn-primary" %>
-      <%= link_to "(JSON)", event_path(e, format: :json), class: "btn btn-default" %>
-      <%= link_to "(XML)", event_path(e, format: :xml), class: "btn btn-default" %>
-      <%= link_to "Edit", edit_event_path(e), class: "btn btn-default" %>
-      <%= link_to "Delete", event_path(e), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
-    </td>
-  </tr>
-  <% end %>
-</table>
+<%= form_tag events_path, :method => :get do %>
+  <%= text_field_tag "keyword", params[:keyword] %>
+  <%= submit_tag "Search" %>
+<% end %>
+</br>
+<%= form_tag bulk_update_events_path do %>
+  <table class="table">
+    <% @events.each do |e| %>
+    <tr>
+      <td><%= check_box_tag "ids[]", e.id, false %>  <%= e.name %></td>
+      <td>
+        <%= link_to "Show", event_path(e), class: "btn btn-primary" %>
+        <%= link_to "Dashborad", dashboard_event_path(e), class: "btn btn-primary" %>
+        <%= link_to "Attendees List", event_attendees_path(e), class: "btn btn-primary" %>
+        <%= link_to "(JSON)", event_path(e, format: :json), class: "btn btn-default" %>
+        <%= link_to "(XML)", event_path(e, format: :xml), class: "btn btn-default" %>
+        <%= link_to "Edit", edit_event_path(e), class: "btn btn-default" %>
+        <%= link_to "Delete", event_path(e), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
 
+  <%= submit_tag "Delete" %>
+  <%= submit_tag "Publish" %>
+  <%= submit_tag "Draft" %>
 
-<%= link_to "New Event", new_event_path %>
+<% end %>
+<p>
+<%= link_to 'Sort by Name', events_path( :order => "name") %>
+<%= link_to 'Sort by Default', events_path %>
+</p>
+<%= link_to "admin", admin_events_path %>
+</br>
+<%= link_to "New Event", new_event_path, class: "btn btn-primary" %>
 <%= paginate @events %>

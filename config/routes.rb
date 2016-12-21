@@ -1,6 +1,18 @@
 Rails.application.routes.draw do
   resources :events do
   	resources :attendees, controller: "event_attendees"
+    collection do
+      get :latest
+      post :bulk_update
+    end
+
+    member do 
+      get :dashboard
+    end
+  end
+
+  namespace :admin do
+    resources :events
   end
   
   resources :people
